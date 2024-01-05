@@ -22,144 +22,43 @@ void shootBehaviourSelect(void);
 void shootCtrlChangeHandle(void);
 void shootFeedbackUpdata(void);
 void shootHeatLimt(void);
-void shootspeedlimit(void);
-void shootsensorhandle(void);
 void shootPidCalc(void);
 void shootTuchuanProc(void);
 void shootBehInit(shoot_behaviour_t *initBeh, shoot_motor_mode_e flm, shoot_motor_mode_e frm, shoot_motor_mode_e plm, shoot_behaviour_e num, 
 					void (*behaviorHandleFun)(float *leftFirExp, float *rightFirExp, float *shootHzSet), bool_t (*enterBehaviorCondition)(void),
 					bool_t (*outBehaviorCondition)(void), void (*enterBehaviorFun)(void), void (*outBehaviorFun)(void));
 					
-float l_speed_real,l_speed_set,r_speed_set,r_speed_real,bomb_real,l_speed_exp,r_speed_exp;
-s16 PL_REAL,PL_EXP;		 //7060   4570	
-s16 error_l_r;					
-					
-//处理微动开关的中断					
-int sensorStatus = 0;
-int bulletflag = 0;
-int sFlagStatus;
-int fla_jiance;
-					
-void EXTI15_10_IRQHandler()
-{
-	if (EXTI_GetITStatus(EXTI_Line12)== RESET)
-  {	
-		bulletflag = 1;				
-		EXTI_ClearITPendingBit(EXTI_Line12);
-	}
-}
-	
-extern int singletime;
-extern int singletimeflag;		
-extern int Electricpushtimeflag;
-extern int Electricpushtime;
-extern uint8_t gongdan_fla;
-extern int gongdan_tim;
-extern uint8_t qiangzhi_gongdan_fla;
-extern int qiangzhi_gongdan_tim;
-extern uint8_t fan_zhuan;
-extern int fan_zhuan_tim;
-extern int tuigan_flag;
-extern int tuigan_tim;
+s16 PL_REAL,PL_EXP;		 //7060   4570		
+
+
+	float view_shoot_left, view_shoot_right, view_shoot_plate; //云台观测
+	float *flExp,*frExp,*plExp;
+
 //发射任务主函数
 void shootTask(void *pvParameters)
 {
 	//发射相关初始化
 	shootInit();
 	vTaskDelay(1000);
-	float *flExp,*frExp,*plExp;	
 	TickType_t shootDelayTick = xTaskGetTickCount();
 	while(1)
 	{
+		//云台观测
+		view_shoot_left = shootTaskStructure.leftFirMotor.speed;
+		view_shoot_right = shootTaskStructure.rightFirMotor.speed;
+		view_shoot_plate = shootTaskStructure.plateMotor.base_inf.real_speed_rpm;
 		
-		//Jscope观测变量
-//		l_speed_exp =shootTaskStructure.leftFirMotor.speedSet;
-//		r_speed_set =shootTaskStructure.rightFirMotor.speedSet;
-//		l_speed_real=shootTaskStructure.leftFirMotor.speed;
-		l_speed_real=shootTaskStructure.leftFirMotor.speed;
-		r_speed_real=shootTaskStructure.rightFirMotor.speed;
-		l_speed_exp=shootTaskStructure.leftFirMotor.speedSet;
-		r_speed_exp=shootTaskStructure.rightFirMotor.speedSet;
-		error_l_r=shootTaskStructure.leftFirMotor.speed+shootTaskStructure.rightFirMotor.speed;
-		fla_jiance=READING_SENSOR();
-		
-				if(SHOOT_FIRST_PRESS_R)
-	{
-			__set_FAULTMASK(1);
-			NVIC_SystemReset();
-	}	
-	
-		if(singletimeflag == 1)
-  	{
-	    singletime ++ ;
-	  }
-		
-		if(Electricpushtimeflag == 1)
-		{
-			Electricpushtime ++;
-		}
-		
-		if(gongdan_fla==1)
-		{
-			gongdan_tim++;
-		}
-		//强制供弹
-		if(qiangzhi_gongdan_fla==1)
-		{
-			qiangzhi_gongdan_tim++;
-		}
-		//反转
-		if(fan_zhuan==1)
-		{
-			fan_zhuan_tim++;
-		}	
-		if(tuigan_flag==1)
-		{
-			tuigan_tim++;
-		}
-		
-		//微动开关传感器相关处理
-		shootsensorhandle();
-//		shootTuchuanProc();
-		//射速限制
-		shootspeedlimit();
 		//选择当前发射的模式
 		shootBehaviourSelect();
 		//发生控制方式切换进行清0
 		shootCtrlChangeHandle();
 		//实际数据更新
 		shootFeedbackUpdata();
-	  //根据拨盘模式给拨盘电机赋值
-		if(shootTaskStructure.plateMotor.mode == SHOOT_MOTOR_POSITION)
-		{
-			plExp = &(shootTaskStructure.plateMotor.position_set);
-		}
-		else if(shootTaskStructure.plateMotor.mode == SHOOT_MOTOR_SPEED)
-		{
+
 			plExp = &(shootTaskStructure.shootHzSet);
-		}
-		else if(shootTaskStructure.plateMotor.mode == SHOOT_MOTOR_RAW)
-		{
-			plExp = &(shootTaskStructure.plateMotor.rawCmdCurrent);
-		}
-		//左摩擦轮模式选择
-		if(shootTaskStructure.leftFirMotor.mode == SHOOT_MOTOR_SPEED)
-		{
 			flExp = &(shootTaskStructure.leftFirMotor.speedSet);
-		}
-		else if(shootTaskStructure.leftFirMotor.mode == SHOOT_MOTOR_RAW)
-		{
-			flExp = &(shootTaskStructure.leftFirMotor.rawCmdCurrent);
-		}
-		//右摩擦轮模式选择
-		if(shootTaskStructure.rightFirMotor.mode == SHOOT_MOTOR_SPEED)
-		{
 			frExp = &(shootTaskStructure.rightFirMotor.speedSet);
-		}
-		else if(shootTaskStructure.rightFirMotor.mode == SHOOT_MOTOR_RAW)
-		{
-			frExp = &(shootTaskStructure.rightFirMotor.rawCmdCurrent);
-		}
+
 		//给处理函数赋值
 		shootTaskStructure.nowBeh->behaviorHandleFun(flExp, frExp, plExp);
 		//更新遥控器参数
@@ -174,9 +73,8 @@ void shootTask(void *pvParameters)
 														-gimbalTaskStructure.yawMotor.  base_inf.given_current,
 														shootTaskStructure. plateMotor.base_inf.given_current,
 		                        shootTaskStructure. leftFirMotor.base_inf.given_current, 
-		                        shootTaskStructure. rightFirMotor.base_inf.given_current);	// 发射优先级更高，转移至发射任务
-		//时间延时
-//		vTaskDelay(SHOOT_TASK_MS);
+		                        shootTaskStructure. rightFirMotor.base_inf.given_current);
+		
 		vTaskDelayUntil(&shootDelayTick, SHOOT_TASK_MS);
 	}
 }
@@ -210,9 +108,6 @@ void shootInit()
 	//行为初始化
 	shootBehInit(shootTaskStructure.behList + SHOOT_DEBUG, DEBUG_SHOOT_LF_TYPE, DEBUG_SHOOT_RF_TYPE, DEBUG_SHOOT_PL_TYPE, SHOOT_DEBUG, shootbehDebugHandleFun, shootbehDebugEnterCondition, shootbehDebugOutCondition, NULL, NULL);
 	shootBehInit(shootTaskStructure.behList + SHOOT_ZERO_FORCE, SHOOT_MOTOR_RAW, SHOOT_MOTOR_RAW, SHOOT_MOTOR_RAW, SHOOT_ZERO_FORCE, shootbehZeroForceHandleFun, shootbehZeroForceEnterCondition, shootbehZeroForceOutCondition, NULL, NULL);
-	shootBehInit(shootTaskStructure.behList + SHOOT_SENSOR, SHOOT_MOTOR_SPEED, SHOOT_MOTOR_SPEED, SHOOT_MOTOR_SPEED, SHOOT_SENSOR, shootbehSensorHandleFun, shootbehSensorEnterCondition, shootbehSensorOutCondition, NULL, NULL);
-	//shootBehInit(shootTaskStructure.behList + SHOOT_POSITION, SHOOT_MOTOR_SPEED, SHOOT_MOTOR_SPEED, SHOOT_MOTOR_POSITION, SHOOT_POSITION, shootbehPositionHandleFun, shootbehPositionEnterCondition, shootbehPositionOutCondition, NULL, NULL);	
-//	shootBehInit(shootTaskStructure.behList + SHOOT_FIR_OFF, SHOOT_MOTOR_SPEED, SHOOT_MOTOR_SPEED, SHOOT_MOTOR_SPEED, SHOOT_FIR_OFF, shootbehFirOffHandleFun, shootbehFirOffEnterCondition, shootbehFirOffOutCondition, NULL, NULL);		
 	//默认无力模式
 	shootBehChange(shootTaskStructure.behList + SHOOT_ZERO_FORCE);
 }
@@ -268,31 +163,6 @@ void shootBehChange(shoot_behaviour_t *next)
 }
 
 
-//传感器处理函数
-void shootsensorhandle(void)
-{
-	static int sensorTime = 0;  //传感器计时变量
-	
-	//读取微动开关的电平
-	sensorStatus = READING_SENSOR();   
-	//在中断发生之后开始计时
-	if(sensorStatus == 0)
-	{ 
-		sensorTime += 2;
-		//必须要延时，因为传感器电平状态在跳变时可能是不稳定的！原理类似与按键消抖
-		if(sensorTime == 8)
-		{ 
-			shootTaskStructure.shoot_sensor.shootPlateflag = 1;
-			shootTaskStructure.shoot_sensor.Projectile_if_Prepare = 1;
-			sensorTime = 0;
-		}
-	}	
-	else if(sensorStatus == 1)
-	{
-		shootTaskStructure.shoot_sensor.shootPlateflag = 0;
-	}
-}
-
 
 //模式配备函数
 void shootBehInit(shoot_behaviour_t *initBeh, shoot_motor_mode_e flm, shoot_motor_mode_e frm, shoot_motor_mode_e plm, shoot_behaviour_e num, 
@@ -322,7 +192,6 @@ void shootPlateReset()
 	shootTaskStructure.plateMotor.position_set = shootTaskStructure.plateMotor.base_inf.real_ecd;
 	shootTaskStructure.plateMotor.rawCmdCurrent = 0;
 	shootTaskStructure.shootNumSet = 0;
-	shootTaskStructure.shoot_sensor.lastSensorStatus=BULLET_OFF;
 }
 
 
@@ -518,52 +387,7 @@ void shootHeatLimt()
 static int shoot_speed_change=0;
 static int choice_mode=0;
 
-void shootspeedlimit(void)
-{
-    switch(BoardBLink.RefreeSyetem.robot.u8_level)
-	  {
-		case 1:
-					shootTaskStructure.shootspeed_set=SHOOT_SPEED_LOW;
-					break;
-		case 2:
-					shootTaskStructure.shootspeed_set=SHOOT_SPEED_MID;
-					break;
-		case 3:
-					shootTaskStructure.shootspeed_set=SHOOT_SPEED_HIGH;
-					break;
-   	}
-}
 
-
-//void shootTuchuanProc(void)
-//{
-//	if(IF_KEY_PRESSED_Q)
-//	{
-//		Electricpush2_flag ++ ;
-//	}
-//	else if(IF_MOUSE_PRESSED_RIGH)
-//	{
-//		douji_flag ++ ;
-//	}	
-//	
-//	if((Electricpush2_flag%2)==0)
-//	{
-//		Electricpush2_off();
-//	}
-//	else if((Electricpush2_flag%2)==0)
-//	{
-//		Electricpush2_on();
-//	}
-//	
-//	if((douji_flag%2)==0)
-//	{
-//		HEAD_CLOSE();
-//	}
-//	else if((douji_flag%2)==0)
-//	{
-//		HEAD_OPEN();
-//	}	
-//}
 
 
 

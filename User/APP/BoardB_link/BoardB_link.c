@@ -74,8 +74,8 @@ void boardB_link_Task(void *pvParameters)
 	    SendToBoardB_aboutFire(2,shootTaskStructure.shootspeed_set);	
 		}
 		
-    SendToBoardB_aboutShoot(shootTaskStructure.shoot_sensor.Projectile_if_Prepare,shootTaskStructure.shootfirturn_flag);
-		SendToBoardB_aboutGongdan(shootTaskStructure.shoot_sensor.shootPlateflag);
+//    SendToBoardB_aboutShoot(shootTaskStructure.shoot_sensor.Projectile_if_Prepare,shootTaskStructure.shootfirturn_flag);
+//		SendToBoardB_aboutGongdan(shootTaskStructure.shoot_sensor.shootPlateflag);
 		vTaskDelayUntil(&currentTime, 5);
 	}
 }

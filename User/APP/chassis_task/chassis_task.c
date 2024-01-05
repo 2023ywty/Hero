@@ -40,11 +40,7 @@ void chassisPowerLimt();
 u16 real_date,exp_date;
 u16 real_agle,exp_agle;
 
-
-float view_chassis_1 = 0;
-float view_chassis_2 = 0;
-float view_chassis_3 = 0;
-float view_chassis_4 = 0;
+	float view_chassis_1, view_chassis_2, view_chassis_3, view_chassis_4; //底盘观测
 
 //函数名称：chassisTask()
 //函数作用：底盘任务主函数
@@ -52,19 +48,19 @@ float view_chassis_4 = 0;
 //返回  值：无
 void chassisTask(void *pvParameters)
 {
-	portTickType currentTime;
 	//底盘初始化
 	chassisTaskInit();
 	//FreeRTOS操作系统相对延时函数，为其他任务初始化提供时间
 	vTaskDelay(4);
 	//获取当前时间，提供给绝对延时函数上
-	currentTime = xTaskGetTickCount();
+	portTickType currentTime = xTaskGetTickCount();
 	while(1)
 	{
-	view_chassis_1 = chassisTaskStructure.motor[CHASSIS_CM1].filterSpeed;
-	view_chassis_2 = chassisTaskStructure.motor[CHASSIS_CM2].filterSpeed;
-	view_chassis_3 = chassisTaskStructure.motor[CHASSIS_CM3].filterSpeed;
-	view_chassis_4 = chassisTaskStructure.motor[CHASSIS_CM4].filterSpeed;
+		//底盘观测
+		view_chassis_1 = chassisTaskStructure.motor[CHASSIS_CM1].filterSpeed;
+		view_chassis_2 = chassisTaskStructure.motor[CHASSIS_CM2].filterSpeed;
+		view_chassis_3 = chassisTaskStructure.motor[CHASSIS_CM3].filterSpeed;
+		view_chassis_4 = chassisTaskStructure.motor[CHASSIS_CM4].filterSpeed;
 		
 		real_date = BoardBLink.RefreeSyetem.power.chassis_power;
 		exp_date  = BoardBLink.RefreeSyetem.power.chassis_power_buff;

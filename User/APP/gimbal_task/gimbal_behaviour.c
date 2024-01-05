@@ -44,18 +44,6 @@ void gimbalDebugBehaviourHandleFun(float *yawExp, float *pitExp)
 		*pitExp = 0;   
 		return;		
 	}
-		
-	
-//		if(s16_abs(RC_CH2_LLR_OFFSET) > 20)
-//			yawInc += 0.001*RC_CH2_LLR_OFFSET;
-//		if(s16_abs(RC_CH1_RUD_OFFSET) > 20)
-//			pitInc += 0.001*RC_CH1_RUD_OFFSET;	
-	
-	if(GIMBAL_FIRST_CH2_MID && GIMBAL_FIRST_MOUSE_X_STOP)
-		*yawExp = gimbalTaskStructure.yawMotor.angle[GYRO];
-	else
-//		*yawExp = yawInc;
-		*pitExp = pitInc;
 	
 	*yawExp = 0;
 	*pitExp = 0;
