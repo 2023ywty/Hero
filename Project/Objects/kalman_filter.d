@@ -1,0 +1,10 @@
+.\objects\kalman_filter.o: ..\User\USER_LIB\kalman_filter.c
+.\objects\kalman_filter.o: ..\User\USER_LIB\kalman_filter.h
+.\objects\kalman_filter.o: ..\Libraries\CMSIS\Include\arm_math.h
+.\objects\kalman_filter.o: ..\Libraries\CMSIS\Include\core_cm4.h
+.\objects\kalman_filter.o: D:\MDK\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\kalman_filter.o: ..\Libraries\CMSIS\Include\core_cmInstr.h
+.\objects\kalman_filter.o: ..\Libraries\CMSIS\Include\core_cmFunc.h
+.\objects\kalman_filter.o: ..\Libraries\CMSIS\Include\core_cmSimd.h
+.\objects\kalman_filter.o: D:\MDK\ARM\ARMCC\Bin\..\include\string.h
+.\objects\kalman_filter.o: D:\MDK\ARM\ARMCC\Bin\..\include\math.h
