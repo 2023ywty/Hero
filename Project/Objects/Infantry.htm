@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Infantry.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Infantry.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Fri Jan 05 21:34:12 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sun Jan 07 21:47:47 2024
 <BR><P>
 <H3>Maximum Stack Usage =        360 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1204,8 +1204,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
-<LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan2
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
+<LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan2
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;INS_task
 </UL>
@@ -4339,10 +4339,10 @@ Global Symbols
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chassisPidCalc
 <LI><a href="#[248]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
+<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 <LI><a href="#[262]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_infnan2
 <LI><a href="#[258]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_infnan
 <LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 <LI><a href="#[267]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
 <LI><a href="#[266]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
 <LI><a href="#[25c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
@@ -4355,10 +4355,10 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chassisPidCalc
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;INS_task
+<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 <LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
 <LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
 <LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan2
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 <LI><a href="#[267]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
 <LI><a href="#[266]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
 </UL>
@@ -4368,10 +4368,10 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
+<BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
+<LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
 <LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
 <LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan2
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 <LI><a href="#[267]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
 <LI><a href="#[266]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
 </UL>
@@ -4392,10 +4392,10 @@ Global Symbols
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chassisAloneHandleFun
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Calc
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chassisPidCalc
+<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 <LI><a href="#[25b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_underflow
 <LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
 <LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 <LI><a href="#[267]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
 <LI><a href="#[266]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
 <LI><a href="#[25c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
@@ -4416,10 +4416,10 @@ Global Symbols
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chassisAloneHandleFun
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;chassisPidCalc
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;INS_task
+<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 <LI><a href="#[259]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_invalid
 <LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
 <LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan2
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 </UL>
 
 <P><STRONG><a name="[bd]"></a>__aeabi_i2d</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, dflti.o(.text))
@@ -4607,8 +4607,8 @@ Global Symbols
 <P><STRONG><a name="[25a]"></a>__ARM_fpclassify</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, fpclassify.o(i.__ARM_fpclassify))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __ARM_fpclassify
 </UL>
-<BR>[Called By]<UL><LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
+<BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
+<LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
 <LI><a href="#[267]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
 </UL>
 
@@ -4650,12 +4650,12 @@ Global Symbols
 <P><STRONG><a name="[14e]"></a>__hardfp_asinf</STRONG> (Thumb, 258 bytes, Stack size 16 bytes, asinf.o(i.__hardfp_asinf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __hardfp_asinf &rArr; sqrtf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[257]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_invalid
+<BR>[Calls]<UL><LI><a href="#[260]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_underflow
+<LI><a href="#[257]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_invalid
 <LI><a href="#[255]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_infnan
 <LI><a href="#[25f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassifyf
 <LI><a href="#[256]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 <LI><a href="#[254]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrtf
-<LI><a href="#[260]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_underflow
 </UL>
 <BR>[Called By]<UL><LI><a href="#[14d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AHRS_asinf
 </UL>
@@ -4695,10 +4695,10 @@ Global Symbols
 <P><STRONG><a name="[152]"></a>__hardfp_atan2f</STRONG> (Thumb, 594 bytes, Stack size 32 bytes, atan2f.o(i.__hardfp_atan2f))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __hardfp_atan2f
 </UL>
-<BR>[Calls]<UL><LI><a href="#[265]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_infnan2
+<BR>[Calls]<UL><LI><a href="#[260]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_underflow
+<LI><a href="#[265]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_infnan2
 <LI><a href="#[25f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassifyf
 <LI><a href="#[256]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
-<LI><a href="#[260]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_underflow
 </UL>
 <BR>[Called By]<UL><LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AHRS_atan2f
 </UL>
@@ -4738,12 +4738,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[14c]"></a>__hardfp_tanf</STRONG> (Thumb, 322 bytes, Stack size 16 bytes, tanf.o(i.__hardfp_tanf), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[257]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_invalid
+<BR><BR>[Calls]<UL><LI><a href="#[260]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_underflow
+<LI><a href="#[257]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_invalid
 <LI><a href="#[255]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_infnan
 <LI><a href="#[25f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassifyf
 <LI><a href="#[256]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 <LI><a href="#[269]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_rredf2
-<LI><a href="#[260]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_underflow
 </UL>
 <BR>[Called By]<UL><LI><a href="#[14b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AHRS_tanf
 </UL>
@@ -4783,9 +4783,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
+<BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
+<LI><a href="#[268]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
 <LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 <LI><a href="#[267]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
 </UL>
 
@@ -4809,10 +4809,10 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
+<BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
+<LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sin
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 </UL>
 
 <P><STRONG><a name="[262]"></a>__mathlib_dbl_infnan2</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, dunder.o(i.__mathlib_dbl_infnan2))
@@ -4828,9 +4828,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sin
+<BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sin
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 </UL>
 
 <P><STRONG><a name="[25b]"></a>__mathlib_dbl_underflow</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, dunder.o(i.__mathlib_dbl_underflow))
@@ -4838,8 +4838,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 </UL>
-<BR>[Called By]<UL><LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
+<BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
+<LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
 <LI><a href="#[267]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
 </UL>
 
@@ -4876,7 +4876,8 @@ Global Symbols
 <P><STRONG><a name="[362]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
 <P><STRONG><a name="[256]"></a>__set_errno</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, errno.o(i.__set_errno))
-<BR><BR>[Called By]<UL><LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_acosf
+<BR><BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
+<LI><a href="#[150]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_acosf
 <LI><a href="#[25e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrt
 <LI><a href="#[13b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sqrt
 <LI><a href="#[14c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_tanf
@@ -4885,7 +4886,6 @@ Global Symbols
 <LI><a href="#[152]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan2f
 <LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan2
 <LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asinf
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 <LI><a href="#[254]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrtf
 </UL>
 
@@ -4900,9 +4900,9 @@ Global Symbols
 <P><STRONG><a name="[25d]"></a>fabs</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, fabs.o(i.fabs))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = fabs
 </UL>
-<BR>[Called By]<UL><LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
+<BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
+<LI><a href="#[261]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan
 <LI><a href="#[13c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan2
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asin
 <LI><a href="#[266]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
 </UL>
 

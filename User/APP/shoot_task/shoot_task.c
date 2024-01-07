@@ -23,14 +23,10 @@ void shootCtrlChangeHandle(void);
 void shootFeedbackUpdata(void);
 void shootHeatLimt(void);
 void shootPidCalc(void);
-void shootTuchuanProc(void);
 void shootBehInit(shoot_behaviour_t *initBeh, shoot_motor_mode_e flm, shoot_motor_mode_e frm, shoot_motor_mode_e plm, shoot_behaviour_e num, 
 					void (*behaviorHandleFun)(float *leftFirExp, float *rightFirExp, float *shootHzSet), bool_t (*enterBehaviorCondition)(void),
 					bool_t (*outBehaviorCondition)(void), void (*enterBehaviorFun)(void), void (*outBehaviorFun)(void));
 					
-s16 PL_REAL,PL_EXP;		 //7060   4570		
-
-
 	float view_shoot_left, view_shoot_right, view_shoot_plate; //云台观测
 	float *flExp,*frExp,*plExp;
 
@@ -198,14 +194,11 @@ void shootPlateReset()
 //实际值更新函数
 void shootFeedbackUpdata()
 {
-	//将摩擦轮转速rpm转化为摩擦轮边线速度
-//	shootTaskStructure.leftFirMotor.speed  = PI/1000.0*shootTaskStructure.leftFirMotor.base_inf.real_speed_rpm;
-//	shootTaskStructure.rightFirMotor.speed = PI/1000.0*shootTaskStructure.rightFirMotor.base_inf.real_speed_rpm;
+	//将摩擦轮转速rpm转化为摩擦轮边线速度（卡尔曼滤波）
 	shootTaskStructure.leftFirMotor.filterSpeed = KalmanFilter(&(shootTaskStructure.leftFirMotor.klmFiller), shootTaskStructure.leftFirMotor.base_inf.real_speed_rpm);
 	shootTaskStructure.rightFirMotor.filterSpeed = KalmanFilter(&(shootTaskStructure.rightFirMotor.klmFiller), shootTaskStructure.rightFirMotor.base_inf.real_speed_rpm);
 	shootTaskStructure.leftFirMotor.speed  = PI/1000.0*shootTaskStructure.leftFirMotor.filterSpeed;
 	shootTaskStructure.rightFirMotor.speed = PI/1000.0*shootTaskStructure.rightFirMotor.filterSpeed;
-	//更新热量相关内容，没写
 }
 
 
@@ -216,16 +209,14 @@ void shootPidInit()
 	PIDInit(&(shootTaskStructure.plateMotor.PIDParameter[INNER]), 130, 1.2, 0, 0, 10000, 50/36.0, 3100/36.0, -1, 5000, SPEED);
 	PIDInit(&(shootTaskStructure.plateMotor.PIDParameter[OUTER]),   5, 0, 0, 0, -1, 0, -1, 360 , -1, POSITION_360);
 	//左右摩擦轮电机速度环
-//	PIDInit(&(shootTaskStructure.leftFirMotor.PIDParameter)	, 900	, 2.00f, 2400	, 0, 12000, 0, 15, 29, 2000, SPEED);//450 2 100 (iband 9)
-//	PIDInit(&(shootTaskStructure.rightFirMotor.PIDParameter), 1200, 2.50f, 2400	, 0, 12000, 0, 15, 29, 2000, SPEED);//390 2 75 (iband 9)
 	PIDInit(&(shootTaskStructure.leftFirMotor.PIDParameter)	, 1500	, 5.00f, 4000	, 0, 16000, 0, 15, 29, 2000, SPEED);
 	PIDInit(&(shootTaskStructure.rightFirMotor.PIDParameter), 1800	, 5.00f, 4000	, 0, 16000, 0, 15, 29, 2000, SPEED);
 }
 
 
-//角度转换函数
+//编码器差值 优弧转反向劣弧
 fp32 motor_ecd_to_angle_change(uint16_t ecd, uint16_t offset_ecd)
-{ //将误差转换为最小的那方面的误差比如 当前实际值为8190，期望值为1，正常算出来的结果是8189，但是实际的差距应该是-2   ？？
+{ 
     int32_t relative_ecd = ecd - offset_ecd;
     if (relative_ecd > 4096)
     {
@@ -381,15 +372,4 @@ void shootHeatLimt()
 				shootTaskStructure.plateMotor.position_set= shootTaskStructure.plateMotor.base_inf.real_ecd;//position下期望值为当前值	
 	}
 }
-
-
-//射速限制函数
-static int shoot_speed_change=0;
-static int choice_mode=0;
-
-
-
-
-
-
 
